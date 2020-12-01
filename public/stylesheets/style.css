@@ -5,7 +5,7 @@ body {
 
 }
 :root{
-  --lg-color: linear-gradient( to right, grey, black);
+  --lg-color: linear-gradient( to right, black, grey);
 }
 
 a {
