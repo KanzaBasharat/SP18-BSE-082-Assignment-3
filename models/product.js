@@ -14,7 +14,7 @@ function validateProduct(data) {
 	  name: Joi.string().min(3).max(20).required(),
 	  price: Joi.number().min(0).required(),
     size: Joi.string().required(),
-    category: Joi.string().required()
+    category: Joi.string().required(),
 	});
 	return schema.validate(data, { abortEarly: false });
   }

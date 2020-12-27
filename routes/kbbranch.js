@@ -21,5 +21,20 @@ router.get("/delete/:id", async function (req, res, next) {
   let product = await Branch.findByIdAndDelete(req.params.id);
   res.redirect("/branchs");
 });
+router.get("/edit/:id", async function (req, res, next) {
+  let product = await Branch.findById(req.params.id);
+  res.render("branchs/edit",{ product });
+});
+router.post("/edit/:id", async function (req, res, next) {
+  let product = await Branch.findById(req.params.id);
+  const { error } = validate(req.body);
+	if (error) return res.status(400).send(error.details[0].message);
+  product.name = req.body.name;
+  product.location = req.body.location;
+
+
+  await product.save();
+  res.redirect("/branchs");
+});
 
 module.exports = router;

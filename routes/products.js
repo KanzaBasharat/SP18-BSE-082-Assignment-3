@@ -6,7 +6,7 @@ var checkSessionAuth = require("../middlewares/checkSessionAuth");
 router.get("/", async function (req, res, next) {
   let products = await Product.find();
   console.log(req.session.user);
-  res.render("products/list", { title: "Products In DB", products });
+  res.render("products/list", { title: "Products In KB", products });
 });
 router.get("/add",checkSessionAuth, async function (req, res, next) {
   res.render("products/add");
@@ -37,13 +37,6 @@ router.get("/cart/remove/:id", async function (req, res, next) {
   cart.splice(cart.findIndex((c) => c._id==req.params.id),1);
   res.cookie("cart",cart);
   res.redirect("/cart");
-});
-router.get("/cart/order/:id", async function (req, res, next) {
-  let cart =[];
-  if(req.cookies.cart) cart = req.cookies.cart;
-  cart.splice(cart.findIndex((c) => c._id==req.params.id),1);
-  res.cookie("cart",cart);
-  res.redirect("/Order");
 });
 router.get("/edit/:id", async function (req, res, next) {
   let product = await Product.findById(req.params.id);

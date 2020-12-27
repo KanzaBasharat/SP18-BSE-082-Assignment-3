@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+    h3#w Edit Branch
+        form(action="/branchs/edit/"+product._id,method="post", id="x")
+            .form-group
+                label(for="name") Name
+                input#name(type="text",class="form-control", name="name", value= product.name)
+            .form-group
+                label(for="location") Location
+                input#location(type="text",class="form-control", name="location", value= product.location)
+            input(type="submit", class="btn btn-info", id="yy")

@@ -107,5 +107,9 @@ a {
   width: 200%;
   font-size: 20px;
 }
-
+#yy{
+  color: white;
+  background: linear-gradient( to right, purple, black);
+  font-weight: bold;
+}
 
