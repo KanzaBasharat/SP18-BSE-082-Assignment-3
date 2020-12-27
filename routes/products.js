@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Product = require("../models/product");
+var {Product,validate} = require("../models/product");
 var checkSessionAuth = require("../middlewares/checkSessionAuth");
 /* GET home page. */
 router.get("/", async function (req, res, next) {
@@ -12,6 +12,8 @@ router.get("/add",checkSessionAuth, async function (req, res, next) {
   res.render("products/add");
 });
 router.post("/add", async function (req, res, next) {
+  const { error } = validate(req.body);
+	if (error) return res.status(400).send(error.details[0].message);
   let product = new Product(req.body);
   await product.save();
   res.redirect("/products");
@@ -49,6 +51,8 @@ router.get("/edit/:id", async function (req, res, next) {
 });
 router.post("/edit/:id", async function (req, res, next) {
   let product = await Product.findById(req.params.id);
+  const { error } = validate(req.body);
+	if (error) return res.status(400).send(error.details[0].message);
   product.name = req.body.name;
   product.price = req.body.price;
   product.size = req.body.size;

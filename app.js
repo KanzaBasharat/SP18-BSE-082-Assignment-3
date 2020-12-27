@@ -6,6 +6,7 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 var indexRouter = require('./routes/index');
 var productsRouter = require('./routes/products');
+var brouter = require('./routes/kbbranch');
 var usersRouter = require('./routes/users');
 var session = require('express-session')
 var sessionAuth = require("./middlewares/sessionAuth");
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/products', productsRouter);
+app.use('/branchs', brouter);
 app.use('/', usersRouter);
 
 // catch 404 and forward to error handler
